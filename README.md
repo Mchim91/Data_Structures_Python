@@ -9,4 +9,8 @@ HOW YOU SHOULD READ THE DOCUMENTATION
 3.) Then pointers.py
 4.) Then Linkedlist.py
 5.) Then DoublyLinkedlist.py
+6.) Then Stacks.py
+7.) Then Queue.py
+8.) Then Trees.py
+9.) Then Graphs.py
 
