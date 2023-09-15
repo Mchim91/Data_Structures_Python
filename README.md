@@ -13,4 +13,9 @@ HOW YOU SHOULD READ THE DOCUMENTATION
 7.) Then Queue.py
 8.) Then Trees.py
 9.) Then Graphs.py
-
+10.) Then Recursion.py
+11.) Then RecursionBinarySearchTrees.py
+12.) Then BasicSorts.py
+13.) Then MergeSort.py
+14.) Then QuickSort.py
+15.) Then TreeTraversal.py
