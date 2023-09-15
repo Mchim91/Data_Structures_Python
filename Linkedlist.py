@@ -65,10 +65,11 @@ class LinkedList:
         
     # Print the list
     def print_list(self):
-        temp = self.head
+        temp = self.head  # Initialize a temporary pointer to the head of the linked list.
+
         while temp is not None:
-            print(temp.value)
-            temp = temp.next
+            print(temp.value) # Print the value of the current node.
+            temp = temp.next  # Move the temporary pointer to the next node.
 
 
     # Method to append to the end of a Linked List
@@ -80,19 +81,23 @@ class LinkedList:
     def append(self, value):
         # Create a node with the given value:
         new_node = Node(value)
+
         # Check if the linked list is empty
-        if self.head is None: # or you can write it like this ###### if self.length == 0;
-            # If the Linkedlist is empty, set the head and tail to point at new_node:
+        if self.head is None: # Check if the head is None, indicating an empty linked list.
+            # If the linked list is empty, set both the head and tail to point to the new_node:
             self.head = new_node
             self.tail = new_node
-        # When there's an item at the end of the linked list 
+        # When there's at least one item in the linked list:
         else:
-            # If the head is not None (which means the LL has at least one node), update the next attribute of the node tail is pointing to, to point to new_node:
+            # Update the next attribute of the node tail is pointing to, to point to new_node:
             self.tail.next = new_node
-            # Set tail to point to new_node:
+            # Update the tail to point to new_node, making it the new tail of the linked list:
             self.tail = new_node
-        # Increment the length of the linked list by 1:
+
+        # Increment the length of the linked list by 1 to keep track of the number of elements:
         self.length += 1
+
+        # Return True to indicate successful insertion of the new node:
         return True
     
     
@@ -104,182 +109,230 @@ class LinkedList:
     # An algorithm with a single loop that iterates through all n items in the worst case has a time complexity of O(n)
     # This is what lets us know this is O(n):
     def pop(self):
-        # Check if the Linkedlist is equal to None
+        # Check if the linked list is empty (has a length of 0):
         if self.length == 0:
-            return None
-        # set a temp variable to the head of the Linkedlist
+            return None # If it's empty, there's nothing to pop, so return None.
+        
+        # Initialize a temporary variable 'temp' to the head of the linked list:
         temp = self.head
-        # set a prev (previous) variable to the head of the Linkedlist also
+
+        # Initialize a previous variable 'pre' to the head of the linked list as well:
         pre = self.head
-        # As long the next item of the temp variable is not equals to None
+
+        # Traverse the linked list until 'temp' reaches the last node (where temp.next is None):
         while (temp.next) is not None:
-            # Assign the prev to temp because both of them are assigned to the Head of the Linkedlist
+            # Update 'pre' to be the same as 'temp' because both are initially set to the head:
             pre = temp
-            # Point the temp variable to the temp.next
+
+            # Update the tail of the linked list to be the previous node 'pre':
             temp = temp.next
-        # Assign the tail variable to pre
+
+        # Update the tail of the linked list to be the previous node 'pre':
         self.tail = pre
-        # Decrement the Linkedlist
+
+        # Decrement the length of the linked list by 1 to reflect the removal of the last node:
         self.length -= 1
-        # if the Linkedlist is equals to None
+
+        # If the linked list is now empty:
         if self.length == 0:
-            # Assign the head & tail to None
+            # Set both the head and tail to None to indicate an empty list:
             self.head = None
             self.tail = None
-        # Return the temp & you can also return the value by using return temp.value
+
+        # Return the node that was removed (the last node, 'temp'):
         return temp
     
 
     # Prepend - adding an item to the beginning of a Linked list
     # It's a O(1) algorithm 
     def predend(self, value):
-        # Create a new node with given values
+         # Create a new node with the given value:
         new_node = Node(value)
-        # Check if the length of the Linkedlist is empty
+        
+        # Check if the linked list is empty (has a length of 0):
         if self.length == 0:
-            # If it's not empty assign head & tail to the new node
+            # If it's empty, assign both the head and tail to the new node:
             self.head = new_node
             self.tail = new_node
         else:
-            # Assign the next value of the new not to the head
+            # If the linked list is not empty:
+            # Assign the 'next' attribute of the new node to point to the current head:
             new_node.next = self.head
-            # Assign the head to the new node
+            # Update the head to be the new node, effectively making it the new head:
             self.head = new_node  
-        # Increment the Linkedlist 
+
+        # Increment the length of the linked list by 1 to reflect the addition of the new node: 
         self.length += 1
-        # Return True
+
+        # Return True to indicate successful insertion at the beginning:
         return True
     
 
     # Pop the first item out of a list
     # It's a O(1)
     def pop_first(self):
-        # Check if the list is empty
+        # Check if the linked list is empty (has a length of 0):
         if self.length == 0:
-            # If it's empty return None
+            # If it's empty, return None because there's nothing to pop.
             return None
-        # Assign temp variable to the head
+        
+        # Assign a temporary variable 'temp' to the current head:
         temp = self.head
-        # Assign head variable to the next head item in the Linkedlist
+
+        # Update the head to point to the next head item in the linked list,
+        # effectively removing the current head from the list:
         self.head = self.head.next
-        # Assign the next temp variable to None
+
+        # Set the 'next' attribute of 'temp' to None to remove its link to the rest of the list:
         temp.next = None
-        # Decrement the length of the linkedlist
+
+        # Decrement the length of the linked list by 1 to reflect the removal of the first node:
         self.length -= 1
-        # check if the length of the linkedlist is 
+
+        # Check if the linked list is now empty: 
         if self.length == 0:
+            # If it's empty, set the tail to None to indicate an empty list.
             self.tail = None
-        # Return the temp variable
+
+        # Return the 'temp' variable, which contains the removed node.
         return temp
     
 
     # Get
     # It's a O(n) operation
     def get(self, index):
-        # Check if the index is less than 0 or the index is greater than of equal to the Linkedlist
+        # Check if the index is less than 0 or greater than or equal to the length of the linked list:
         if index < 0 or index >= self.length:
+            # If the index is out of bounds, return None.
             return None
-        # Assign the temp variable to the head
+        
+        # Assign a temporary variable 'temp' to the head of the linked list:
         temp = self.head
-        # The for loop makes us know that it's O(n)
-        # Keep iterating through the linkedlist and check the indexes
+
+        # Iterate through the linked list to find the node at the specified index.
+        # The loop makes it clear that the time complexity is O(n), where 'n' is the number of nodes in the list.
         for _ in range(index):
-            # Assign the temp variable to the next item in the temp
+            # Move 'temp' to the next node in the linked list.
             temp = temp.next
-        # Return the temp
+
+        # Return the 'temp' variable, which now points to the node at the specified index.
         return temp
     
 
     # Set 
     # It's O(n) operation
     def set_value(self, index, value):
-        # Using the get method in the set method and assign it to the temp variable
+        # Use the 'get' method to retrieve the node at the specified index and assign it to the 'temp' variable.
         temp = self.get(index)
-        # The loop is an evidence that it's O(n) operation
-        # Check if the temp is not None
+
+        # Check if the 'temp' variable is not None (i.e., a valid node was found).
         if temp is not None:
-            # Assign a value to the temp variable and then assign it to a value
+            # Set the 'value' attribute of the 'temp' node to the provided 'value'.
             temp.value = value
-            # Return True afterwards
+
+            # Return True to indicate that the value was successfully updated.
             return True
-        # Retrun False afterwards
+        
+        # If 'temp' is None, it means the index was out of bounds or the linked list is empty.
+        # Return False to indicate that the value was not updated.
         return False
     
 
     # insert a node into the Linked list
     # It's O(n) operation
     def insert(self, index, value):
-        # Check if the index is less than 0 or index is greater than or equal to the length of the of the Linkedlist
+        # Check if the index is less than 0 or greater than or equal to the length of the linked list:
         if index < 0 or index >= self.length:
+            # If the index is out of bounds, return False because insertion is not possible.
             return False
-        # Check if the index is equal to 0
+        
+        # Check if the index is equal to 0, indicating insertion at the beginning of the list:
         if index == 0:
-            # Return the attached value to the begining of the Linkedlist using the prepend method which we handled earlier
+            # Use the 'prepend' method to insert the value at the beginning and return the result.
             return self.predend(value)
-        # Check if the index is equal to the length of the Linkedlist
+        
+        # Check if the index is equal to the length of the linked list, indicating insertion at the end:
         if index == self.length:
-            # Return the attached value the end of the Linkedlist using the append method which was handled earlier
+            # Use the 'append' method to insert the value at the end and return the result.
             return self.append(value)
-        # Assign a new node variable to the Node of type value
+        
+        # Create a new node with the provided 'value':
         new_node = Node(value)
-        # Assign a temp variable to get method index and decrement the value of the index by 1
+
+        # Use the 'get' method to retrieve the node at 'index - 1' and assign it to 'temp':
         temp = self.get(index - 1)
-        # Create the next new node variable and pass to the temp next
+
+        # Make the new node's 'next' attribute point to the same node that 'temp' is pointing to:
         new_node.next = temp.next
-        # Then equate the temp next variable to the new node
+
+        # Update the 'next' attribute of 'temp' to point to the new node, effectively inserting it into the list:
         temp.next = new_node
-        # Increment the length of the Linkedlist
+
+        # Increment the length of the linked list to reflect the addition of the new node:
         self.length += 1
-        # Return True
+
+        # Return True to indicate successful insertion.
         return True
     
 
     # remove an item from a particular Linkedlist
     # It's O(n) operation
     def remove(self, index):
-        # Check if the index is less than 0 or index is greater than or equal to the length of the of the Linkedlist 
+        # Check if the index is less than 0 or greater than or equal to the length of the linked list:
         if index < 0 or index >= self.length:
+            # If the index is out of bounds, return None because removal is not possible.
             return None
-        # Check if the index is equal to zero
+        
+        # Check if the index is equal to 0, which indicates removal of the first item in the list:
         if index == 0:
-            # Return pop_first method which was created earlier used to remove the first item from the Linkedlist
+            # Use the 'pop_first' method to remove and return the first item from the linked list.
             return self.pop_first()
-        # Check if the index is equal to the decrement of the lenght of the Linkedlist
+        
+        # Check if the index is equal to the length of the linked list minus 1, indicating removal of the last item:
         if index == self.length - 1:
-            # Return pop method which was created earlier to remove and item from a list
+            # Use the 'pop' method to remove and return the last item from the linked list.
             return self.pop()
-        # Assign a previous variable to a get method that was created earlier which passes the decrement of the index
-        prev = self.get(index - 1)
-        # temp = self.get(index - 1) This line of code would still work but it's ineffecient because
-        # the get method is O(n) but there is a O(1) way of assigning the temp variable which is what is done below  
+            
+        # Assign 'temp' directly to the 'next' attribute of 'prev', making it O(1) instead of calling 'get' again:
+        prev = self.get(index - 1) 
+
+        # Assign 'temp' directly to the 'next' attribute of 'prev', making it O(1) instead of calling 'get' again:
         temp = prev.next
+
+        # Update the 'next' attribute of 'prev' to point to the node following 'temp', effectively removing 'temp' from the list:
         prev.next = temp.next
-        # To break the node
+
+        # Break the link by setting the 'next' attribute of 'temp' to None:
         temp.next = None
+
+        # Decrement the length of the linked list to reflect the removal of the node:
         self.length -= 1
+
+         # Return the removed node, which is 'temp':
         return temp
     
 
     # reverse an item from a Linkedlist
     # N.B: It's a very common interview question
-    # Steps
-    # 1.) Assign a temp to the head
-    # 2.) Assign the head to a tail
-    # 3.) Assign the tail to temp
-    # 4.) Assign a variable on the right of temp called (after) and one at the left of temp called (before) which would point to None
-    # 5.) The three variables would iterate through the linkedlist as we are reversing everthing
-    # 6.) We have a for loop that goes through the lenght of the Linkedlist
-    # 7.) We now have the after to be equals to the temp.next & the temp.next would be equals to the before variable
     def reverse(self):
+        # Swap the head and tail pointers to reverse the direction of the linked list.
         temp = self.head
         self.head = self.tail
         self.tail = temp
+
+        # Initialize 'after' to the 'next' node of 'temp' and 'before' to None.
         after = temp.next
         before = None
+
+        # Iterate through the linked list to reverse the order of nodes.
         for _ in range(self.length):
+            # Store the 'next' node of 'temp' in 'after'.
             after = temp.next
+
+            # Reverse the direction by setting the 'next' attribute of 'temp' to 'before'.
             temp.next = before
-            # 8) This makes sure that the Linkedlist doesn't break because of the gap that's created
+
+            # Move 'before' and 'temp' pointers one step forward in the linked list.
             before = temp
             temp = after
 
@@ -449,5 +502,3 @@ def remove_duplicates(self):
             else:
                 runner = runner.next
         current = current.next
-
-
